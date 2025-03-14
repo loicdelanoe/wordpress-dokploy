@@ -3,10 +3,10 @@ services:
   wordpress:
     image: wordpress:6.7.1
     environment:
-      WORDPRESS_DB_HOST: db
-      WORDPRESS_DB_USER: exampleuser
-      WORDPRESS_DB_PASSWORD: examplepass
-      WORDPRESS_DB_NAME: exampledb
+      WORDPRESS_DATABASE_HOST: db
+      WORDPRESS_DATABASE_USER: exampleuser
+      WORDPRESS_DATABASE_PASSWORD: examplepass
+      WORDPRESS_DATABASE_NAME: exampledb
     volumes:
       - wordpress_data:/var/www/html
       - ./config/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
