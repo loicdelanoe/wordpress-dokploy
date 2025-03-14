@@ -3,10 +3,10 @@ services:
   wordpress:
     image: wordpress:6.7.1
     environment:
-      WORDPRESS_DATABASE_HOST: db
-      WORDPRESS_DATABASE_USER: exampleuser
-      WORDPRESS_DATABASE_PASSWORD: examplepass
-      WORDPRESS_DATABASE_NAME: exampledb
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: $MYSQL_USER
+      WORDPRESS_DB_PASSWORD: $MYSQL_PASSWORD
+      WORDPRESS_DB_NAME: $MYSQL_DATABASE
     volumes:
       - wordpress_data:/var/www/html
       - ./config/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
@@ -14,10 +14,9 @@ services:
   db:
     image: mysql:5.7.34
     environment:
-      MYSQL_DATABASE: exampledb
-      MYSQL_USER: exampleuser
-      MYSQL_PASSWORD: examplepass
-      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
       - db_data:/var/lib/mysql
 
