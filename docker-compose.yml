@@ -13,8 +13,6 @@ services:
     volumes:
       - wordpress_data:/var/www/html
       - ./config/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
-    networks:
-      - portfolio-wordpress-p97u1g
 
   db:
     image: mysql
@@ -26,13 +24,7 @@ services:
       MYSQL_ROOT_PASSWORD: wordpress
     volumes:
       - db_data:/var/lib/mysql
-    networks:
-      - portfolio-wordpress-p97u1g
 
 volumes:
-  wordpress_data: null
-  db_data: null
-
-networks:
-  portfolio-wordpress-p97u1g:
-    external: true
+  wordpress_data:
+  db_data:
