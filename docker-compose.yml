@@ -13,12 +13,6 @@ services:
     volumes:
       - wordpress_data:/var/www/html
       - ./config/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.flowiseai.rule=Host(`portfolio.loicdelanoe.com`)"
-      - "traefik.http.routers.flowiseai.entrypoints=websecure"
-      - "traefik.http.routers.flowiseai.tls.certResolver=letsencrypt"
-      - "traefik.http.services.flowiseai.loadbalancer.server.port=3000"
 
   db:
     image: mysql
