@@ -3,8 +3,10 @@ services:
     depends_on:
       - db
     image: wordpress:6.7
-    networks:
-      - dokploy-network
+    ports:
+      - "8000:80"
+    # networks:
+    #   - dokploy-network
     environment:
       WORDPRESS_DB_HOST: db
       WORDPRESS_DB_USER: wordpress
@@ -12,12 +14,14 @@ services:
       WORDPRESS_DB_NAME: portfolio
     volumes:
       - wordpress_data:/var/www/html
-      - ./config/.htaccess:/var/www/html/.htaccess
+      - ./themes:/var/www/html/wp-content/themes
+      - ./plugins:/var/www/html/wp-content/plugins
+      - ./uploads:/var/www/html/wp-content/uploads
 
   db:
     image: mysql
-    networks:
-      - dokploy-network
+    # networks:
+    #   - dokploy-network
     restart: always
     environment:
       MYSQL_DATABASE: portfolio
@@ -26,11 +30,11 @@ services:
       MYSQL_ROOT_PASSWORD: wordpress
     volumes:
       - db_data:/var/lib/mysql
+      - ./database/data.sql:/docker-entrypoint-initdb.d/data.sql
 
 volumes:
   wordpress_data:
   db_data:
-
-networks:
-  dokploy-network:
-    external: true
+# networks:
+#   dokploy-network:
+#     external: true
